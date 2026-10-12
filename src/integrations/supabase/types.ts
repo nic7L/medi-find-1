@@ -14,16 +14,158 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      facilities: {
+        Row: {
+          address: string
+          area: string
+          category: string
+          closing_time: string
+          created_at: string
+          description: string
+          email: string | null
+          id: string
+          is_24h: boolean
+          latitude: number | null
+          longitude: number | null
+          name: string
+          opening_time: string
+          phone: string | null
+          services: string[]
+          verified: boolean
+          website: string | null
+        }
+        Insert: {
+          address?: string
+          area?: string
+          category: string
+          closing_time?: string
+          created_at?: string
+          description?: string
+          email?: string | null
+          id?: string
+          is_24h?: boolean
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          opening_time?: string
+          phone?: string | null
+          services?: string[]
+          verified?: boolean
+          website?: string | null
+        }
+        Update: {
+          address?: string
+          area?: string
+          category?: string
+          closing_time?: string
+          created_at?: string
+          description?: string
+          email?: string | null
+          id?: string
+          is_24h?: boolean
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          opening_time?: string
+          phone?: string | null
+          services?: string[]
+          verified?: boolean
+          website?: string | null
+        }
+        Relationships: []
+      }
+      feedback: {
+        Row: {
+          comment: string
+          created_at: string
+          facility_id: string
+          id: string
+          rating: number
+          user_name: string
+        }
+        Insert: {
+          comment?: string
+          created_at?: string
+          facility_id: string
+          id?: string
+          rating: number
+          user_name: string
+        }
+        Update: {
+          comment?: string
+          created_at?: string
+          facility_id?: string
+          id?: string
+          rating?: number
+          user_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "facilities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +292,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
