@@ -60,7 +60,7 @@ export const feedbackQuery = (facilityId: string) =>
   });
 
 function toMinutes(t: string) {
-  const [h, m] = t.split(":").map(Number);
+  const [h = 0, m = 0] = t.split(":").map(Number);
   return h * 60 + m;
 }
 
@@ -73,7 +73,7 @@ export function isOpenNow(f: Pick<FacilityRow, "is_24h" | "opening_time" | "clos
 }
 
 export function formatTime(t: string) {
-  const [h, m] = t.split(":").map(Number);
+  const [h = 0, m = 0] = t.split(":").map(Number);
   const d = new Date();
   d.setHours(h, m);
   return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });

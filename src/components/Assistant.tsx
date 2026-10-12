@@ -28,7 +28,7 @@ function answer(q: string, data: Facility[]): Msg {
   for (const [cat, words] of Object.entries(catMap)) {
     if (words.some((w) => s.includes(w))) {
       list = list.filter((f) => f.category === cat);
-      tags.push(CATEGORY_META[cat].label.toLowerCase() + "s");
+      tags.push((CATEGORY_META[cat]?.label ?? cat).toLowerCase() + "s");
       break;
     }
   }
