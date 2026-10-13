@@ -28,7 +28,8 @@ export function Footer() {
         </div>
       </div>
       <p className="border-t py-6 text-center text-xs text-muted-foreground">
-        © {2026} MediFind · CSE326 Health Facility Resource Directory. Information is for guidance only — in an emergency call 112.
+        © {2026} MediFind · CSE326 Health Facility Resource Directory. Information is for guidance only — in an emergency call 112. 
+Group Members Veronic, Sunil, Sushanth
       </p>
     </footer>
   );
